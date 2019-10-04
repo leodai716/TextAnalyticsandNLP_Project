@@ -10,7 +10,7 @@ import pandas as pd
 os.chdir(r'D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics adn NLP in Finance\TextAnalyticsandNLP_Project')
 
 # Importing the dataset
-dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
+dataset = pd.read_csv('Text Analytics Example_Restaurant Reviews.tsv', delimiter = '\t', quoting = 3)
 
 # Cleaning the texts
 import re
