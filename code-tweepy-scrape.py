@@ -1,13 +1,14 @@
-# This script shows how you can set up your Twitter API login
-# information.
+import tweepy
+
+#API log in
 access_token = "1181129334968336384-q2TTL9ujFCfxHBfUxghKfR09JVQLaJ"
 access_token_secret = "Pa0Z5Zoo6O24DgnrxFh0RQstx65yx5aTTcWQQKK2p4u2I"
 consumer_key = "9eBNPCiIe7AExJxE0SvauYMDY"
 consumer_secret = "igPSn0FddQasy2LTPUHMzzUGW27s3VofInIdGpYxPY3LKhuLlS"
-import tweepy
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
+
 # Check the tweets in your stream.
 class listener(tweepy.StreamListener):
     def on_status(self, status):
@@ -25,7 +26,7 @@ class listener(tweepy.StreamListener):
                 except AttributeError:
                     refinedText = status.text
                 
-            #Print to console
+            #Print to console (unecessary; just cool to stare at and for debug use)
             print(status.user.screen_name, status.user.followers_count, status.created_at,\
                   refinedText, retweet, extendedTweet, "\n", sep="\n")
             
@@ -46,8 +47,6 @@ mystream = \
         auth=api.auth,
         listener=listener(),
         tweet_mode = 'extended')
-# Filter the stream for whatever you want. In this case we are
-# listening for tweets that mention a select stock index/ETF, fixed
-# income index/ETF, or a commodities index/ETF. More tickers could be
-# added here.
+
+# Filter
 mystream.filter(languages=["en"], track=['Brexit'])
