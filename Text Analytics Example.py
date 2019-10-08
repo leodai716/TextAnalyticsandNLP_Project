@@ -49,8 +49,3 @@ y_pred = classifier.predict(X_test)
 # Making the Confusion Matrix
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test, y_pred)
-
-count = 0
-for i in range(0, len(y_test)):
-    if y_pred[i] == y_test[i]:
-        count = count + 1
