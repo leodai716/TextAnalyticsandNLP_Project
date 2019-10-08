@@ -32,8 +32,7 @@ class listener(tweepy.StreamListener):
                     extendedTweet = False
                     
             #Removing new line and tabs
-            refinedText = refinedText.replace("\n", " ")
-            refinedText = refinedText.replace("\t", " ")
+            refinedText = refinedText.replace("\n", " ").replace("\t", " ")
                 
             #Print to console (unecessary; just cool to stare at and for debug use)
             print(status.user.screen_name, status.user.followers_count, status.created_at,\
