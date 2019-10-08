@@ -1,5 +1,4 @@
 import tweepy
-import os
 
 #API log in
 access_token = "1181129334968336384-q2TTL9ujFCfxHBfUxghKfR09JVQLaJ"
@@ -19,21 +18,18 @@ class listener(tweepy.StreamListener):
         with open(outputFile, 'a', encoding = "utf-8") as f:
             
             #Whether the tweet is a retweet and whether it is an extended tweet
-            retweet = False 
-            extendedTweet = False
+            retweet = hasattr(status, "retweeted_status") 
+            extendedTweet = True    #by default
             
+            #try-except operations to extract full texts from status
             try:
                 refinedText = status.retweeted_status.extended_tweet['full_text']
-                extendedTweet = True
             except AttributeError:
                 try:
                     refinedText = status.extended_tweet['full_text']
-                    extendedTweet = True
                 except AttributeError:
                     refinedText = status.text
-            
-            if hasattr(status, "retweeted_status") == True:
-                retweet = True 
+                    extendedTweet = False
                     
             #Removing new line and tabs
             refinedText = refinedText.replace("\n", " ")
