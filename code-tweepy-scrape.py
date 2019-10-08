@@ -1,4 +1,5 @@
 import tweepy
+import os
 
 #API log in
 access_token = "1181129334968336384-q2TTL9ujFCfxHBfUxghKfR09JVQLaJ"
@@ -9,15 +10,20 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
+#Output file name and/or directory
+outputFile = 'data-streaming-tweets.tsv'
+
 # Check the tweets in your stream.
 class listener(tweepy.StreamListener):
     def on_status(self, status):
-        with open('data-streaming-tweets.tsv', 'a', encoding = "utf-8") as f:
+        with open(outputFile, 'a', encoding = "utf-8") as f:
+            
+            #Whether the tweet is a retweet and whether it is an extended tweet
             retweet = False 
             extendedTweet = False
+            
             try:
                 refinedText = status.retweeted_status.extended_tweet['full_text']
-                retweet = True 
                 extendedTweet = True
             except AttributeError:
                 try:
@@ -25,6 +31,13 @@ class listener(tweepy.StreamListener):
                     extendedTweet = True
                 except AttributeError:
                     refinedText = status.text
+            
+            if hasattr(status, "retweeted_status") == True:
+                retweet = True 
+                    
+            #Removing new line and tabs
+            refinedText = refinedText.replace("\n", " ")
+            refinedText = refinedText.replace("\t", " ")
                 
             #Print to console (unecessary; just cool to stare at and for debug use)
             print(status.user.screen_name, status.user.followers_count, status.created_at,\
