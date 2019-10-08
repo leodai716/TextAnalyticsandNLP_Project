@@ -1,3 +1,8 @@
+# set director
+import os
+
+os.chdir(r"D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics adn NLP in Finance\TextAnalyticsandNLP_Project")
+
 import tweepy
 
 #API log in
@@ -16,11 +21,11 @@ outputFile = 'data-streaming-tweets.tsv'
 class listener(tweepy.StreamListener):
     def on_status(self, status):
         with open(outputFile, 'a', encoding = "utf-8") as f:
-            
+
             #Whether the tweet is a retweet and whether it is an extended tweet
-            retweet = hasattr(status, "retweeted_status") 
+            retweet = hasattr(status, "retweeted_status")
             extendedTweet = True    #by default
-            
+
             #try-except operations to extract full texts from status
             try:
                 refinedText = status.retweeted_status.extended_tweet['full_text']
@@ -30,14 +35,14 @@ class listener(tweepy.StreamListener):
                 except AttributeError:
                     refinedText = status.text
                     extendedTweet = False
-                    
+
             #Removing new line and tabs
             refinedText = refinedText.replace("\n", " ").replace("\t", " ")
-                
+
             #Print to console (unecessary; just cool to stare at and for debug use)
             print(status.user.screen_name, status.user.followers_count, status.created_at,\
                   refinedText, retweet, extendedTweet, "\n", sep="\n")
-            
+
             f.write(            # Write the data to file.
                 status.user.screen_name + '\t' + \
                 str(status.user.followers_count) + '\t' + \
@@ -45,7 +50,7 @@ class listener(tweepy.StreamListener):
                 refinedText + '\t' + \
                 str(retweet) + '\t' + \
                 str(extendedTweet) + '\n')
-    
+
     def on_error(self, status_code):
         print(status_code)
 
