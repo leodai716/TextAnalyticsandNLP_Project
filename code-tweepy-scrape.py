@@ -25,32 +25,34 @@ class listener(tweepy.StreamListener):
             #Whether the tweet is a retweet and whether it is an extended tweet
             retweet = hasattr(status, "retweeted_status")
             extendedTweet = True    #by default
-
-            #try-except operations to extract full texts from status
-            try:
-                refinedText = status.retweeted_status.extended_tweet['full_text']
-            except AttributeError:
+            
+            try:    #for rare cases where some machines fail to process certain emojis (aka the "Flag Bug"); or overall uncaptured bugs
+                #try-except operations to extract full texts from status
                 try:
-                    refinedText = status.extended_tweet['full_text']
+                    refinedText = status.retweeted_status.extended_tweet['full_text']
                 except AttributeError:
-                    refinedText = status.text
-                    extendedTweet = False
+                    try:
+                        refinedText = status.extended_tweet['full_text']
+                    except AttributeError:
+                        refinedText = status.text
+                        extendedTweet = False
 
-            #Removing new line and tabs
-            refinedText = refinedText.replace("\n", " ").replace("\t", " ")
+                #Removing new line and tabs
+                refinedText = refinedText.replace("\n", " ").replace("\t", " ")
 
-            #Print to console (unecessary; just cool to stare at and for debug use)
-            print(status.user.screen_name, status.user.followers_count, status.created_at,\
-                  refinedText, retweet, extendedTweet, "\n", sep="\n")
+                #Print to console (unecessary; just cool to stare at and for debug use)
+                print(status.user.screen_name, status.user.followers_count, status.created_at,\
+                      refinedText, retweet, extendedTweet, "\n", sep="\n")
 
-            f.write(            # Write the data to file.
-                status.user.screen_name + '\t' + \
-                str(status.user.followers_count) + '\t' + \
-                str(status.created_at) + '\t' + \
-                refinedText + '\t' + \
-                str(retweet) + '\t' + \
-                str(extendedTweet) + '\n')
-
+                f.write(            # Write the data to file.
+                    status.user.screen_name + '\t' + \
+                    str(status.user.followers_count) + '\t' + \
+                    str(status.created_at) + '\t' + \
+                    refinedText + '\t' + \
+                    str(retweet) + '\t' + \
+                    str(extendedTweet) + '\n')
+            except: #for rare cases where some machines fail to process certain emojis (aka the "Flag Bug"); or overall uncaptured bugs
+                on_error
     def on_error(self, status_code):
         print(status_code)
 
