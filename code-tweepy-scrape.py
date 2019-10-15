@@ -54,6 +54,7 @@ class listener(tweepy.StreamListener):
             except: #for rare cases where some machines fail to process certain emojis (aka the "Flag Bug"); or overall uncaptured bugs
                 f.close()
                 on_error
+                pass
     def on_error(self, status_code):
         print(status_code)
 
