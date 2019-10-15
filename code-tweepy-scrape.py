@@ -52,9 +52,9 @@ class listener(tweepy.StreamListener):
                     str(retweet) + '\t' + \
                     str(extendedTweet) + '\n')
             except: #for rare cases where some machines fail to process certain emojis (aka the "Flag Bug"); or overall uncaptured bugs
-                on_error
-    def on_error(self, status_code):
-        print(status_code)
+                pass
+    #def on_error(self, status_code):
+        #print(status_code)
 
 # Instantiate an object of class `tweepy.Stream`.
 mystream = \
