@@ -37,8 +37,11 @@ def getNews(Newsurl):
             text = para1.replace("\ufffd", " ") + " " + para2.replace("\ufffd", " ")
 
             writetext = Date + "\t" + title + "\t" + text +"\n"
-
+            
+            f = open(filename, "a")
             f.write(writetext)
+            f.close()
+
 
         except:
             continue
@@ -83,6 +86,8 @@ filename = "gardianpastopinion.tsv"
 f = open(filename, "w")
 headers = "Date\ttitle\ttext\n"
 f.write(headers)
+f.close()
+
 
 # loop through months
 for month in months:
@@ -105,5 +110,7 @@ for month in months:
                     continue
     except:
         continue
-# close the tsv
-f.close()
+
+
+
+
