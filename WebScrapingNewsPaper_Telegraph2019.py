@@ -10,8 +10,8 @@ from selenium import webdriver
 from bs4 import BeautifulSoup as soup
 
 #directory/URL setup:
-extention_dir_str = r"C:\Users\marzl\Documents\#Python codes\#Browser Drivers\bypass-paywalls-chrome.crx"
-webdriver_dir_str = r"C:\Users\marzl\Documents\#Python codes\#Browser Drivers\chromedriver.exe"
+extention_dir_str = r"D:\Python\Browser Drivers\bypass-paywalls-chrome.crx"
+webdriver_dir_str = r"D:\Python\Browser Drivers\chromedriver.exe"
 os.chdir('D:\\Google Drive\\HKU\\Year 4 Sem 1\\FINA4350 Text Analytics adn NLP in Finance')
 filename = "telegraphpastopinion.tsv"
 waybackMachineURL = 'https://web.archive.org/web/*/https://www.telegraph.co.uk/opinion/'
@@ -62,9 +62,9 @@ def getNews(Newsurl):
             title = opinionpage_soup.find("h1").text.strip()
             para1 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[0].text
             para2 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[1].text
-            text = para1 + " " + para2
-            #text = para1.replace("\ufffd", " ") + " " + para2.replace("\ufffd", " ") 
-            #^^^(I don't see this line's necessity if I am just gonna utf-8-encode the file. Go ahead and decomment it if I'm mistakened)
+            para3 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[2].text
+            text = para1.replace("\ufffd", " ")  + " " + para2.replace("\ufffd", " ")  + " " + para3.replace("\ufffd", " ") 
+        
             writetext = Date + "\t" + title + "\t" + text +"\n"
             
             f = open(filename, "a", encoding = "utf-8")
