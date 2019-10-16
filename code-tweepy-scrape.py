@@ -52,7 +52,6 @@ class listener(tweepy.StreamListener):
                     str(retweet) + '\t' + \
                     str(extendedTweet) + '\n')
             except: #for rare cases where some machines fail to process certain emojis (aka the "Flag Bug"); or overall uncaptured bugs
-                f.close()
                 on_error
                 pass
     def on_error(self, status_code):
