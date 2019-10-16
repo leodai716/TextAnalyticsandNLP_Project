@@ -59,12 +59,12 @@ def getNews(Newsurl):
             elem = browser.find_element_by_xpath("//*")
             opinionpage = elem.get_attribute("outerHTML")
             opinionpage_soup = soup(opinionpage, features="lxml")
-            title = opinionpage_soup.find("h1").text.strip()
+            title = opinionpage_soup.find("h1").text.strip().replace("\ufffd", " ").replace("\t", " ").replace("\n", " ")
             para1 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[0].text
             para2 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[1].text
             para3 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[2].text
             text = para1.replace("\ufffd", " ")  + " " + para2.replace("\ufffd", " ")  + " " + para3.replace("\ufffd", " ") 
-        
+
             writetext = Date + "\t" + title + "\t" + text +"\n"
             
             f = open(filename, "a", encoding = "utf-8")
