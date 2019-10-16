@@ -59,12 +59,10 @@ def getNews(Newsurl):
             elem = browser.find_element_by_xpath("//*")
             opinionpage = elem.get_attribute("outerHTML")
             opinionpage_soup = soup(opinionpage, features="lxml")
-            title = opinionpage_soup.find("h1").text.strip()
+            title = opinionpage_soup.find("h1").text.strip().replace("\ufffd", " ").replace("\t", " ").replace("\n", " ")
             para1 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[0].text
             para2 = opinionpage_soup.find("div", {"class":"article__content js-article"}).find_all("p")[1].text
-            text = para1 + " " + para2
-            #text = para1.replace("\ufffd", " ") + " " + para2.replace("\ufffd", " ") 
-            #^^^(I don't see this line's necessity if I am just gonna utf-8-encode the file. Go ahead and decomment it if I'm mistakened)
+            text = (para1 + " " + para2).replace("\ufffd", " ").replace("\t", " ").replace("\n", " ")
             writetext = Date + "\t" + title + "\t" + text +"\n"
             
             f = open(filename, "a", encoding = "utf-8")
