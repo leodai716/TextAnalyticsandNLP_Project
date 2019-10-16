@@ -1,4 +1,8 @@
-# Understanding Brexit Sentiment    Applying NLP and Text Analytics
-This is a   
+# Motivations
 
+# Technical Details
+
+# Ideas for Further Work 
+
+# Notes for Collaborator 
 
