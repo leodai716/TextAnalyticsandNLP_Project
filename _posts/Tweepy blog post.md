@@ -1,4 +1,5 @@
 
+
 # A Twitter Illiterate's Attempt at Twitter Mining
 Hello, I am Mars Leung. In this project where we attempt to read market sentiment online regarding Brexit to predict the movement of the British Pound's strength, I'm responsible for designing the code for its very first stage - Twitter-mining. 
 
@@ -13,7 +14,7 @@ Of course, later we'll see, my rather simplistic view of how Twitter works would
 I am using the Tweepy packageto perform Twitter-scraping, and that requires access to the Twitter API, for which I needed to apply beforehand. Well actually by itself it's not a hard task. It's just that when I saw this application form, I was reminded of [the red tape of another online platform frequently criticized by their own online creators](https://www.youtube.com/results?search_query=youtube%20is%20broken). 
 
 But it turned out that the approval from Twitter was almost instantaneous, for which I am so grateful, as I can't imagine the whole project being dragged behind waiting for some Twitter employee to manually review and accept my application. Looking back, it's kinda funny how I over-thought things.
-
+![enter image description here](https://github.com/leodai716/TextAnalyticsandNLP_Project/blob/master/_posts/Tweepy%20blog%20post%20images/1.%20API%20application.jpg?raw=true)
 So after this tiny speed bump, I went full-on and built a first prototype.
 ## Understanding Tweeting - the Hard Way
 I have coded long enough to know that it's a miracle when a first prototype is working perfectly, if at all. The programme, which in theory could run indefinitely, ran into an error and stopped after about 5 seconds *(uplifting, I know)*.
@@ -22,11 +23,12 @@ Looking at the output, there are two problems:
 1. The error that broke the programme was `UnicodeEncodeError: 'cp950' codec can't encode character '\U0001f525' in position 60: illegal multibyte sequence`, whatever that meant.
 2. Many tweets output were cut off by an ellipsis (...).
 
+![enter image description here](https://github.com/leodai716/TextAnalyticsandNLP_Project/blob/master/_posts/Tweepy%20blog%20post%20images/2.%20bug%20.jpg?raw=true)
 So, what happened?
 
 ### The Emoji Bug
 It turned out Python ran into problem using ordinary `f.write(string)` method when it attempts to output special characters, which are abundant on Twitter in the form of emojis. It's not that Python cannot process emojis  at all - the console can print them after simple string operations with no problem - it's outputting them into an external file that's problematic.
-
+![enter image description here](https://github.com/leodai716/TextAnalyticsandNLP_Project/blob/master/_posts/Tweepy%20blog%20post%20images/3.%20Console.jpg?raw=true)
 This problem is new to me, because as a student who learns coding mostly for panel-data analyses, I had had no reason dealing with emojis in my previous projects. 
 
 I soon learnt that I could encode the output file in utf-8 with `open(outputFile, 'a', encoding = "utf-8")`, and somehow it just worked, just like magic. The code was able to run indefinitely at last, and the emojis went straight to the output file with no error. Boom - problem solved! With a grin in my face, I moved to problem 2...
@@ -49,5 +51,5 @@ I could pass the blame to the fact that I don't use Twitter, so I had no idea wh
 The code at the end ran perfectly, and we are using it to stream Tweets in real time. After this we will move on to the sentimental-analysis stage, and start the main course. 
 
 *And by the way do you know that on average 7 Tweets are made per second about Brexit? Crazy right?*
-
+![enter image description here](https://github.com/leodai716/TextAnalyticsandNLP_Project/blob/master/_posts/Tweepy%20blog%20post%20images/4.%20Output.jpg?raw=true)
 Overall it was quite a journey. I learnt to use a completely unfamiliar package, the importance of reading documentations, and actually built something useful. I look forward to what will be coming in the next few weeks, and I cannot be more excited.
