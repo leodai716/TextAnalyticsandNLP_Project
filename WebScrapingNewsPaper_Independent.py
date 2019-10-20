@@ -52,10 +52,12 @@ def getNews(Newsurl):
     
         writetext = Date + "\t" + title + "\t" + text +"\n"
         
-        f = open(filename, "a")
-        f.write(writetext)
-        f.close() 
-
+        try:
+            f = open(filename, "a", encoding= "utf-8")
+            f.write(writetext)
+            f.close() 
+        except:
+            continue
 
 
 
