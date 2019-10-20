@@ -11,7 +11,7 @@ To facilitate sentimental analysis through text analytics and natural language p
 
 Of course, later we'll see, my rather simplistic view of how Twitter works would soon be crushed by the mundanity and agony of the reality *(I'm saying that with a slight hyperbole)*.
 ## Applying for Access to the Twitter API
-I am using the Tweepy packageto perform Twitter-scraping, and that requires access to the Twitter API, for which I needed to apply beforehand. Well actually by itself it's not a hard task. It's just that when I saw this application form, I was reminded of [the red tape of another online platform frequently criticized by their own online creators](https://www.youtube.com/results?search_query=youtube%20is%20broken). 
+I am using the Tweepy package to perform Twitter-scraping, and that requires access to the Twitter API, for which I needed to apply beforehand. Well actually by itself it's not a hard task. It's just that when I saw this application form, I was reminded of [the red tape of another online platform frequently criticized by their own online creators](https://www.youtube.com/results?search_query=youtube%20is%20broken). 
 
 But it turned out that the approval from Twitter was almost instantaneous, for which I am so grateful, as I can't imagine the whole project being dragged behind waiting for some Twitter employee to manually review and accept my application. Looking back, it's kinda funny how I over-thought things.
 ![enter image description here](https://github.com/leodai716/TextAnalyticsandNLP_Project/blob/master/_posts/Tweepy%20blog%20post%20images/1.%20API%20application.jpg?raw=true)
