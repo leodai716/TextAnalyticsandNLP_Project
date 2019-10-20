@@ -29,6 +29,9 @@ url: "https://leodai716.github.io" # the base hostname & protocol for your site,
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  
+sass:
+  sass_dir: ./_scss
 
 # Exclude from processing.
 # The following items will not be processed, by default.
