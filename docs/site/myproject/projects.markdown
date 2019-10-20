@@ -7,6 +7,6 @@ order: 1
 ---
 
 I worked on different projects, Here is a snap shot: 
-* [Natural Language Processing](../)
+* [Natural Language Processing](../NLPFinance/)
 * DTCC Opitons Analysis  
 * Many more :)

@@ -18,21 +18,20 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Text Analitics and Natural Language Processing appliction in Brexit and Finance 
+title: Leo Dai
+email: lckdai716@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-baseurl: "/NLPproject" # the subpath of your site, e.g. /blog
+baseurl: "/NLPFinance" # the subpath of your site, e.g. /blog
 url: "https://leodai716.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+instagram_username: leodai716
+github_username:  leodai716
 
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  
-sass:
-  sass_dir: _scss
-  style: compressed
 
 # Exclude from processing.
 # The following items will not be processed, by default.
