@@ -1,15 +1,13 @@
-# set director
-import os
+# This code is scripted for mining twitter tweets data
 
-os.chdir(r"D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics adn NLP in Finance")
+exec(open('../LocalParameter.py').read())
+# change directory
+import os 
+os.chdir("../")
 
 import tweepy
 
 #API log in
-access_token = "1181129334968336384-q2TTL9ujFCfxHBfUxghKfR09JVQLaJ"
-access_token_secret = "Pa0Z5Zoo6O24DgnrxFh0RQstx65yx5aTTcWQQKK2p4u2I"
-consumer_key = "9eBNPCiIe7AExJxE0SvauYMDY"
-consumer_secret = "igPSn0FddQasy2LTPUHMzzUGW27s3VofInIdGpYxPY3LKhuLlS"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
