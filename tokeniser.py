@@ -46,15 +46,33 @@ def my_tokenizer(s):
 word_index_map = {}
 current_index = 0 
 
+positive_tokenized = []
+negative_tokenized = []
+orig_reviews = []
+
 for review in positive_reviews:
+    # put reviews to the orig_review list 
+    orig_reviews.append(review.text)
+    # tokenize each word 
     tokens = my_tokenizer(review.text)
+    # put the reviews to positive_tokenized list 
+    # Note: tokens is a list (i.e. positive_tokenized is a 2D object)
+    positive_tokenized.append(tokens)
+    # append the information to the word_index_map
     for token in tokens:
         if token not in word_index_map:
             word_index_map[token] = current_index
             current_index += 1
 
 for review in negative_reviews:
+    # put reviews to the orig_review list 
+    orig_reviews.append(review.text)
+    # tokenize each word 
     tokens = my_tokenizer(review.text)
+    # put the reviews to positive_tokenized list 
+    # Note: tokens is a list (i.e. negative_tokenized is a 2D object)
+    negative_tokenized.append(tokens)
+    # append the information to the word_index_map
     for token in tokens:
         if token not in word_index_map:
             word_index_map[token] = current_index
@@ -63,14 +81,39 @@ for review in negative_reviews:
 print("len(word_index_map):", len(word_index_map))
 
 # create input matrix 
+
+# create function to turn tokens to vector
+# Note: label = dependent variable
 def tokens_to_vector(tokens, label):
     # create zero vector the size of word_index_map + 1
-    x = np.zeros(len(word_index_map)+1)
+    v = np.zeros(len(word_index_map)+1)
     # counting the occurance of a word that existed in the string
     for t in tokens:
         i = tokens_to_vector[t]
-        x[i] += 1
+        v[i] += 1
     # normalize count
-    x = x/x.sum()
-    x[-1] = label
+    v = v/v.sum()
+    # set label for vector
+    v[-1] = label
+    
+    return v
+
+# Vectorization
+N = len(positive_tokenized) + len(negative_tokenized)
+
+# create a N by D+1 matrix 
+data = np.zeros(N,len(word_index_map) + 1)
+
+i = 0
+
+# create docutment-term matrix 
+for tokens in positive_tokenized:
+    v = tokens_to_vector(tokens, 1)
+    data[i, :] = v
+    i += 1
+
+for tokens in negative_tokenized:
+    v = tokens_to_vector(tokens, 1)
+    data[i, :] = v
+    i += 1
     
