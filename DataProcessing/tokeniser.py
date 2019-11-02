@@ -19,7 +19,7 @@ negative_reviews += extra
 import nltk
 from nltk.stem import WordNetLemmatizer
 wordnet_lemmatizer = WordNetLemmatizer()
-stopwords = set(w.rstrip() for w in open(r"D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics adn NLP in Finance\TextAnalyticsandNLP_Project\stopwords.txt"))
+stopwords = set(w.rstrip() for w in open(r"D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics adn NLP in Finance\TextAnalyticsandNLP_Project\DataProcessing\stopwords.txt"))
 
 # =============================================================================
 # this is a 1-gram tokenizer
