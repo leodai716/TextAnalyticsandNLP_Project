@@ -1,15 +1,20 @@
 # This code is scripted for mining twitter tweets data
-
-exec(open('../LocalParameter.py').read())
-# change directory
-import os 
-os.chdir("../")
-
+import sys
+import os
 import tweepy
 
+#%% Init 
+sys.path.append("..")
+import _LocalVariable
+
+os.chdir(_LocalVariable._DATA_OUTPUT_DIRECTORY)
+
+#%% Get tweets
 #API log in
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(_LocalVariable._TWITTER_CONSUMER_KEY,\
+                           _LocalVariable._TWITTER_CONSUMER_SECRET)
+auth.set_access_token(_LocalVariable._TWITTER_ACCESS_TOKEN,\
+                      _LocalVariable._TWITTER_ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 #Output file name and/or directory
