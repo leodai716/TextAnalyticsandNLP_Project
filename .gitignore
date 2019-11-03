@@ -3,3 +3,5 @@ _LocalVariable.py
 Prelim
 data-streaming-tweets.tsv
 .vscode/
+__pyche__/
+__file__/
