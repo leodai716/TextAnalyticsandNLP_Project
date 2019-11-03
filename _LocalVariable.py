@@ -5,8 +5,13 @@ _WORKING_DIRECTORY = r"D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics"
                      " and NLP in Finance\TextAnalyticsandNLP_Project"
 _DATA_DIRECTORY = r"D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics"\
                   " and NLP in Finance\TextAnalyticsandNLP_Project_Data"
+                  
+                  
+_TRAINED_MODEL_OUTPUT_DIRECTORY = _WORKING_DIRECTORY + r"\TrainedModelOutput"
+
 _DATA_INPUT_DIRECTORY = _DATA_DIRECTORY + r"\Input"
 _DATA_OUTPUT_DIRECTORY = _DATA_DIRECTORY + r"\Output"
+
 
 
 # browser driver path
