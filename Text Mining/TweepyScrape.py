@@ -7,7 +7,7 @@ import tweepy
 sys.path.append("..")
 import _LocalVariable
 
-os.chdir(_LocalVariable._DATA_OUTPUT_DIRECTORY)
+os.chdir(_LocalVariable._DATA_DIRECTORY)
 
 #%% Get tweets
 #API log in
@@ -18,7 +18,7 @@ auth.set_access_token(_LocalVariable._TWITTER_ACCESS_TOKEN,\
 api = tweepy.API(auth)
 
 #Output file name and/or directory
-outputFile = 'data-streaming-tweets.tsv'
+outputFile = 'raw_data-tweets-streaming.tsv'
 
 # Check the tweets in your stream.
 class listener(tweepy.StreamListener):

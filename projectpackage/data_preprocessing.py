@@ -10,47 +10,71 @@ sys.path.append("..")
 import _LocalVariable
 import re
 
-#%% Data processing functions
+#%% Data cleansing functions
 MONTH_DICT = {"jan":"01", "feb":"02", "mar":"03",
-							  "apr":"04", "may":"05", "jun":"06",
-							  "jul":"07", "aug":"08", "sep": "09",
-							  "oct":"10", "nov":"11", "dec":"12"
-							 }
+                              "apr":"04", "may":"05", "jun":"06",
+                              "jul":"07", "aug":"08", "sep": "09",
+                              "oct":"10", "nov":"11", "dec":"12"
+                             }
 
+SPEICAL_WORD_DICT = {}
+
+    
 
 class DataCleansing():
-	'''
-	This functions contains Data Processing functions
-	'''
-	def get_standard_date(nonstandard_date, year = "2019"):
-		# ensure year in str
-		year = str(year)
-		
-		# get month str
-		month_string = nonstandard_date[0:3]
-		month_string = month_string.lower()
-		month = MONTH_DICT[month_string]
-		
-		# get date str
-		date = nonstandard_date[3:]
-		date = int(date)
-		date = "%02d" % date
-		date = str(date)
-		
-		# join year, month, & date
-		standard_date = "-".join([year, month, date])
-		
-		return standard_date
+    '''
+    This functions contains Data Processing functions
+    '''
+    
+    
+    # clean date
+    def get_standard_date(nonstandard_date, year = "2019"):
+        # ensure year in str
+        year = str(year)
+        
+        # get month str
+        month_string = nonstandard_date[0:3]
+        month_string = month_string.lower()
+        month = MONTH_DICT[month_string]
+        
+        # get date str
+        date = nonstandard_date[3:]
+        date = int(date)
+        date = "%02d" % date
+        date = str(date)
+        
+        # join year, month, & date
+        standard_date = "-".join([year, month, date])
+        
+        return standard_date
+    
+    
+    # clean text
+    def get_tidy_text(text_string):
+        '''
+        need improvements
+        '''
+        text_string = text_string.lower()
+        text_string = re.sub("[^a-zA-Z]", " ", text_string)
+        return text_string
 
+#%% 
 
 class DataTransformation():
+    
+    def combine_specialwords(text_string, SPEICAL_WORD_DICT):
+        text_string = text_string
+        for key,value in  SPEICAL_WORD_DICT.items():
+            text_string = re.sub(key, value, text_string)
+        
+        return text_string
 
-	def get_word_index_map():
-		pass
+    def get_word_index_map():
+        pass
 
 
-	def get_term_vector():
-		pass
+    def get_bog_vector():
+        pass
 
 
 
@@ -102,4 +126,4 @@ class DataValidation():
     
     
 
-	
+    

@@ -7,11 +7,17 @@
 # import libraries
 import os
 import time
-os.chdir('D:\\Google Drive\\HKU\\Year 4 Sem 1\\FINA4350 Text Analytics adn NLP in Finance')
+import sys
 
+sys.path.append("../")
+
+import _LocalVariable
+
+os.chdir(_LocalVariable._DATA_DIRECTORY)
 from selenium import webdriver
 import requests
 from bs4 import BeautifulSoup as soup
+import re
 
 
 # In[2]:
@@ -34,7 +40,7 @@ def getNews(Newsurl):
             title = opinionpage_soup.find("h1").text.strip()
             para1 = opinionpage_soup.find("div", {"class":"content__article-body from-content-api js-article__body"}).findAll("p")[0].text
             para2 = opinionpage_soup.find("div", {"class":"content__article-body from-content-api js-article__body"}).findAll("p")[1].text
-            text = para1.replace("\ufffd", " ") + " " + para2.replace("\ufffd", " ")
+            text = re.sub("[^a-zA-Z]+", " ", para1 ) + " " + re.sub("[^a-zA-Z]+", " ", para2)
 
             writetext = Date + "\t" + title + "\t" + text +"\n"
             
@@ -82,7 +88,7 @@ months = page_soup.findAll("div", {"class":"month"})
 
 
 # create tsv with headers
-filename = "gardianpastopinion.tsv"
+filename = "raw_data-opinion-guadian-remove_nonalp.tsv"
 f = open(filename, "w")
 headers = "Date\ttitle\ttext\n"
 f.write(headers)

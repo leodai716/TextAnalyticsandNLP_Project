@@ -3,21 +3,27 @@
 Created on Sat Oct 26 13:17:44 2019
 
 @author: marzl
+modified by: leod
 """
 import csv
 import random
+import sys
 
-tsvPaths = [r"C:\Users\marzl\Desktop\telegraphpastopinion.tsv", r"C:\Users\marzl\Desktop\independentpastopinion.tsv"]
-outputPath = r"C:\Users\marzl\Desktop\output.tsv"
+sys.path.append("../")
 
-def randomlyPick30(tsvPath):
+import _LocalVariable
+
+tsvPaths = _LocalVariable._DATA_DIRECTORY + r"\raw_data-opinion-gardian.tsv"
+outputPath = _LocalVariable._DATA_DIRECTORY + r"\raw_data-BrexitorNot-opinion.tsv"
+
+def randomlyPick60(tsvPath):
     with open(tsvPath, "r", encoding = "utf-8") as tsvfile:
         tsvreader = csv.reader(tsvfile, delimiter="\t")
         lineList = ["\t".join(item) for item in tsvreader]
         random.seed()
-        return random.choices(lineList, k =30)
+        return random.choices(lineList, k =60)
 
-randomList = randomlyPick30(tsv1Path) + randomlyPick30(tsv2Path)
+randomList = randomlyPick60(tsvPaths)
 
 with open(outputPath, "w", encoding = "utf-8") as f:
     for item in randomList:
