@@ -5,12 +5,16 @@ or not.
 '''
 #%% Init
 import sys
+import os
 import pandas as pd
 import numpy as np
 import _LocalVariable
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB # naive base model
 from sklearn.ensemble import AdaBoostClassifier # ada boost model
+import pickle
+
+
 sys.path.append(".")
 
 #%% Loading the data
@@ -69,3 +73,16 @@ model_ab.fit(x_train, y_train)
 print("ada boost model score (train): " + str(model_ab.score(x_train, y_train)))
 print("ada boost model score (test): " + str(model_ab.score(x_test, y_test)))
 
+#%% Saving the results
+os.chdir(_LocalVariable._WORKING_DIRECTORY)
+
+
+def save_object(obj, name):
+    with open('Object/' + name +'.pkl', 'wb') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+
+save_object(word_index_map, 'word_index_map')
+
+save_object(model_nb, "model_nb")
+save_object(model_ab, "model_ab")
