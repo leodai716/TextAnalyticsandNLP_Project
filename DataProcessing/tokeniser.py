@@ -43,7 +43,7 @@ def my_tokenizer(s):
 
 #%% Tokenizaton 
 # creat word index map
-word_index_map = {}
+
 current_index = 0 
 
 positive_tokenized = []

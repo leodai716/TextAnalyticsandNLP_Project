@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 '''
-__all__ = ['DataCleansing', 'DataTransformation', 'DataReduction',]
+__all__ = ['DataCleansing', 'TextProcessing', 'DataTransformation', 'DataReduction',]
 #%% Init 
 import sys
 
@@ -9,6 +9,7 @@ sys.path.append("..")
 #%% Setup
 import _LocalVariable
 import re
+import numpy as np
 
 #%% Data cleansing functions
 MONTH_DICT = {"jan":"01", "feb":"02", "mar":"03",
@@ -16,8 +17,6 @@ MONTH_DICT = {"jan":"01", "feb":"02", "mar":"03",
                               "jul":"07", "aug":"08", "sep": "09",
                               "oct":"10", "nov":"11", "dec":"12"
                              }
-
-SPEICAL_WORD_DICT = {}
 
     
 
@@ -58,23 +57,73 @@ class DataCleansing():
         text_string = re.sub("[^a-zA-Z]", " ", text_string)
         return text_string
 
-#%% 
 
-class DataTransformation():
+#%% Text Processing
+SPECIAL_WORD_DICT = {\
+                 "theresa may": "theresamay", "boris johnson":"borisjohnson",\
+                 "jeremy corbyn":"jeremycorbyn", "donald trump":"donaldtrump",\
+                 }
+
+class TextProcessing():
+
     
-    def combine_specialwords(text_string, SPEICAL_WORD_DICT):
+    def combine_specialwords(text_string):
         text_string = text_string
-        for key,value in  SPEICAL_WORD_DICT.items():
+        for key,value in SPECIAL_WORD_DICT.items():
             text_string = re.sub(key, value, text_string)
         
         return text_string
+#%%  Data Transformation
 
-    def get_word_index_map():
-        pass
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+
+wnl = WordNetLemmatizer()
 
 
-    def get_bog_vector():
-        pass
+class DataTransformation():
+
+
+    def get_tokens(text_string):
+        text_string = text_string
+        # tokenise words
+        tokens = word_tokenize(text_string)
+        # remove words that are too short
+        tokens = [token for token in tokens if len(token) > 2]
+        #remove stopword
+        tokens = [token for token in tokens if tokens not in stopwords.words('english')]
+        # lemmatize words
+        tokens = [wnl.lemmatize(token) for token in tokens]
+        
+        tokens = np.array(tokens)
+    
+        return tokens
+
+
+    def get_word_index_map(array):
+        '''
+        pass in a 2D array
+        '''
+        word_index_map = {}
+        index_count = 0
+        for item in array:
+            for token in item:
+                if token not in word_index_map:
+                    word_index_map[token] = index_count
+                    index_count += 1
+        return word_index_map
+
+
+    def get_bow_vector(tokens, word_index_map):
+        v = np.zeros(len(word_index_map))
+        for token in tokens:
+            i = word_index_map[token]
+            v[i] += 1
+        v = v/v.sum()
+        v = np.array(v)
+        return v
+        
 
 
 
