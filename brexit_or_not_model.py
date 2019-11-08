@@ -45,22 +45,13 @@ data['bow_vector'] = None
 data['bow_vector'] = data['tokens'].apply(\
     lambda x: DataTransformation.get_bow_vector(x, word_index_map))
 
-# create Document Term Matrix
-DTM = pd.DataFrame(columns=np.arange(len(word_index_map)+1))
-
-for i in range(len(data.index)):
-    vector = data['bow_vector'].iloc[i]
-    brexit = data['brexit'].iloc[i]
-    vector = np.append(vector, brexit)
-    vector_df = pd.DataFrame(vector)
-    vector_df = vector_df.T
-    DTM = DTM.append(vector_df)
+DTM = DataTransformation.get_DTM(data, word_index_map)
 
 #%% Data Processing
 x = DTM.iloc[:,:-1]
 y = DTM.iloc[:,-1]
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.4)
 
 
 model_nb = MultinomialNB()

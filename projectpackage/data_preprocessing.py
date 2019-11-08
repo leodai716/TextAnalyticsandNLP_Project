@@ -10,6 +10,7 @@ sys.path.append("..")
 import _LocalVariable
 import re
 import numpy as np
+import pandas as pd
 
 #%% Data cleansing functions
 MONTH_DICT = {"jan":"01", "feb":"02", "mar":"03",
@@ -118,12 +119,41 @@ class DataTransformation():
     def get_bow_vector(tokens, word_index_map):
         v = np.zeros(len(word_index_map))
         for token in tokens:
-            i = word_index_map[token]
-            v[i] += 1
+            if token in word_index_map:
+                i = word_index_map[token]
+                v[i] += 1
         v = v/v.sum()
         v = np.array(v)
         return v
-        
+
+
+    def get_DTM(dataframe, word_index_map):
+        # create Document Term Matrix
+        DTM = pd.DataFrame(columns=np.arange(len(word_index_map)+1))
+
+        for i in range(len(dataframe.index)):
+            vector = dataframe['bow_vector'].iloc[i]
+            brexit = dataframe['brexit'].iloc[i]
+            vector = np.append(vector, brexit)
+            vector_df = pd.DataFrame(vector)
+            vector_df = vector_df.T
+            DTM = DTM.append(vector_df)
+ 
+        return DTM
+
+
+    def get_DTM_predict(dataframe, word_index_map):
+        # create Document Term Matrix
+        DTM = pd.DataFrame(columns=np.arange(len(word_index_map)))
+
+        for i in range(len(dataframe.index)):
+            vector = dataframe['bow_vector'].iloc[i]
+            vector_df = pd.DataFrame(vector)
+            vector_df = vector_df.T
+            DTM = DTM.append(vector_df)
+ 
+        return DTM
+
 
 
 
