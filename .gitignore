@@ -5,5 +5,4 @@ data-streaming-tweets.tsv
 .vscode/
 __pycache__/
 __file__/
-Data/
-Object/
+Data/raw_data-tweets-streaming.tsv
