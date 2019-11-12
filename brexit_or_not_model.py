@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Nov 11 14:18:03 2019
+
+@author: LeoDai
+"""
+
 '''
 This is for building a model that predict whether anarticle is Brexit related
 or not.
@@ -48,10 +55,19 @@ data['bow_vector'] = data['tokens'].apply(\
 DTM = DataTransformation.get_DTM(data, word_index_map)
 
 #%% Data Processing
-x = DTM.iloc[:,:-1]
-y = DTM.iloc[:,-1]
+T_DTM = DTM[DTM.iloc[:,-1]==1]
+F_DTM = DTM[DTM.iloc[:,-1]==0]
+random_list = random.sample(range(len(F_DTM)),len(T_DTM))
+F_DTM = DTM.iloc[random_list,:]
+DTM_mod = T_DTM.append(F_DTM)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.4)
+x_ori = DTM.iloc[:,:-1]
+y_ori = DTM.iloc[:,-1]
+
+x = DTM_mod.iloc[:,:-1]
+y = DTM_mod.iloc[:,-1]
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
 
 
 model_nb = MultinomialNB()
@@ -63,6 +79,7 @@ model_ab = AdaBoostClassifier()
 model_ab.fit(x_train, y_train)
 print("ada boost model score (train): " + str(model_ab.score(x_train, y_train)))
 print("ada boost model score (test): " + str(model_ab.score(x_test, y_test)))
+print("ada boost model score (test): ",str(model_ab.score(x_ori, y_ori)) )
 
 #%% Saving the results
 os.chdir(_LocalVariable._WORKING_DIRECTORY)

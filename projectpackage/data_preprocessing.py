@@ -60,10 +60,40 @@ class DataCleansing():
 
 
 #%% Text Processing
-SPECIAL_WORD_DICT = {\
-                 "theresa may": "theresamay", "boris johnson":"borisjohnson",\
-                 "jeremy corbyn":"jeremycorbyn", "donald trump":"donaldtrump",\
-                 }
+SPECIAL_WORD_DICT = {"theresa may" : "theresamay", #1st Brexit Prime Minister
+                     "boris johnson" : "borisjohnson", #2nd Brexit Prime Minister
+                     "jeremy hunt" : "jeremyhung", #opponent of Boris Johnson for the Presidency
+                     "oliver robbins" : "oliverrobbins", #Europe adivosr to the Prime Minister
+                    "david davis" : "daviddavis", #1st Brexit Secretary
+                    "dominic raab" : "dominicraab", #2nd Brexit Secretary
+                    "stephen barclay" : "stephen barclay", #3rd Brexit Secretary
+                    "jacob rees-mogg" : "jacobreesmogg", #contributed to the defeat of May's deal
+                    "jeremy corbyn" : "jeremycorbyn", #leader of the biggest opposition of Brexit
+                    "yvette cooper" : "yvttecooper", #leader of the biggest opposition of Brexit
+                    "michel barnier" : "michelbarnier", #chief neogtiator of European Commission
+                    "jean-claude junker" : "jeanclaudejuncker", #president of the European Commission
+                    "donald tusk" : "donaldtsuk", #president of the European Council
+                    "guy verhofstadt" : "guyverhofstadt", # Brexit coordinator from the European Parlilament
+                    "article 50" : "article50", #the treaty to exit Europe
+                    "blind brexit" : "blindbrexit", #scenario where the UK leaves the EU without clarity on the terms for future trade deals. Unlike hard brexit, it involves vague commitments
+                    "blindfold brexit" : "blindbrexit", #same as blind brexit
+                    "no deal" : "nodeal",
+                    "clean break brexit" : "hardbrexit", #hard brexit
+                    "no-deal brexit" : "hardbrexit", #hard brexit
+                    "no deal brexit" : "hardbrexit", #hard brexit
+                    "hard brexit" : "hardbrexit", #hard brexit
+                    "soft brexit" : "softbrexit", #soft brexit
+                    "slow brexit" : "slowbrexit", #the brexit process may be extended and it implies a longer period of political uncertainty
+                    "customs union" : "customsunion", #not imposing tariff on member countries and imposing the same tariff to non-member countries
+                    "divorce bill" : "divorcebill", #concerning the payment made by the UK to the EU for Brexit
+                    "exit bill" : "divorcebill", #same as divorce bill
+                    "hard border" : "hardborder", #concerning the border between the UK and the Northern Ireland
+                    "second referendum" : "secondreferendum", #second referendum for Brexit
+                    "norway model" : "norwaymodel", #the UK replicates the model of Norway
+                    "norway plus" : "norwayplus", #the UK replicates thh model of Norway with some changes
+                    "canada model" : " canadamodel", #the UK replciates the model of Canada
+                    "canada plus" : "canadaplus", #the UK replicates the of Canada with some changes
+                }
 
 class TextProcessing():
 
