@@ -20,6 +20,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB # naive base model
 from sklearn.ensemble import AdaBoostClassifier # ada boost model
 import pickle
+import random
 
 
 sys.path.append(".")

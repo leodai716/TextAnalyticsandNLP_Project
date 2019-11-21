@@ -10,7 +10,10 @@ This is a temporary script file.
 # import libraries
 import os
 import time
-os.chdir(r"D:\Google Drive\HKU\Year 4 Sem 1\FINA4350 Text Analytics adn NLP in Finance")
+import sys
+sys.path.append("../")
+import _LocalVariable
+os.chdir(_LocalVariable._DATA_DIRECTORY)
 
 from selenium import webdriver
 import requests

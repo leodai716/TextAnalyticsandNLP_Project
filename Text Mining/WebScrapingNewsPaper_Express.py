@@ -2,18 +2,22 @@
 
 #%% Define Variables
 # load local parameters
-exec(open("../LocalParameter.py").read())
-
 filename = "expressopinion.tsv"
 news_website_link = 'https://web.archive.org/web/*/https://www.express.co.uk/comment'
 
 #%% Init
 import time
 import os
+import sys
 from selenium import webdriver
 from bs4 import BeautifulSoup as soup
+import re
+import pandas as pd
+import numpy as np
 
-os.chdir("../")
+sys.path.append("../")
+import _LocalVariable
+
 
 #%% Functions
 
@@ -42,20 +46,17 @@ def get_opinion_content(opinionlink):
     title = opinion_soup.find("div", {"id":"singleArticle"}).find("h1").text.strip()
     para1 = opinion_soup.find("div", {"id":"singleArticle"}).find("h3").text
     para2 = opinion_soup.find("div", {"id":"singleArticle"}).findAll("p")[0].text+" "+ opinion_soup.find("div", {"id":"singleArticle"}).findAll("p")[1].text
-    text = para1.replace("\ufffd", " ") + " " + para2.replace("\ufffd", " ")
-    content = Date + "\t" + title + "\t" + text +"\n"
+    text = para1 + " " + para2
+    text = re.sub("[^a-zA-Z]", " ", text)
+    last_index = len(data.index) -1
+    data.loc[last_index + 1,:] = [Date, title, text]
 
-    return content
 
 #%% Text mining from express.co.uk/comment
 
-browser = webdriver.Firefox(executable_path = firefox_driver_path)
+browser = webdriver.Firefox(executable_path = _LocalVariable._FIREFOX_DRIVER_PATH)
 
-# create empty tsv with headers
-f = open(filename, "w")
-headers = "Date\ttitle\ttext\n"
-f.write(headers)
-f.close()
+data = pd.DataFrame(columns=np.array(['Date','title','text']))
 
 
 # to to internet archive
@@ -72,34 +73,26 @@ months = page_soup.findAll("div", {"class":"month"})
 
 # loop through months
 for month in months:
-    try:
-        month_title = month.div.text
-        days = month.findAll("div", {"class":"calendar-day"})
-        # check for days lengh
-        if len(days) > 0:
-            # loop through days
-            for day in days:
-                try:
-                    # get date
-                    date_title = str(day.find("a").text)
-                    Date = month_title + date_title
-                    # get site link
-                    sitelink = day.find("a")["href"]
-                    sitelink = "https://web.archive.org/" + sitelink
+    month_title = month.div.text
+    days = month.findAll("div", {"class":"calendar-day"})
+    # check for days lengh
+    if len(days) > 0:
+        # loop through days
+        for day in days:
+            # get date
+            date_title = str(day.find("a").text)
+            Date = month_title + date_title
+            # get site link
+            sitelink = day.find("a")["href"]
+            sitelink = "https://web.archive.org/" + sitelink
 
-                    # get opinion
-                    opinionlinks = get_opinion_links(sitelink)
+            # get opinion
+            opinionlinks = get_opinion_links(sitelink)
+            try:
+                for link in opinionlinks:
+                    get_opinion_content(link)
+            except:
+                continue
 
-                    for link in opinionlinks:
-                        content = get_opinion_content(link)
-
-                        # write to file
-
-                        f = open(filename, "a")
-                        print(content)
-                        f.write(content)
-                        f.close()
-                except:
-                    continue
-    except:
-        continue
+FILE_NAME = _LocalVariable._DATA_DIRECTORY + "\\raw_data-opinion-express.pkl"
+data.to_pickle(FILE_NAME)

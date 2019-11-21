@@ -97,11 +97,12 @@ for file in files_in_data_dir:
     Raw data file will be moved to a 'processed' folder
     Database will be expanded with every new raw data added
     '''
-
+    
     # open tsv as df
     file_path = _LocalVariable._DATA_DIRECTORY + "\\" + file
     binom_data_new = pd.read_csv(file_path,\
                                  sep="\t", engine='python')
+    
 
 
     # clean raw data

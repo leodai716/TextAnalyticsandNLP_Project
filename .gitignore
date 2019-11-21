@@ -1,8 +1,7 @@
-GroupList_ReedFeeds.xlsx
 _LocalVariable.py
 Prelim
 data-streaming-tweets.tsv
 .vscode/
 __pycache__/
 __file__/
-Data/raw_data-tweets-streaming.tsv
+Data/

@@ -11,12 +11,13 @@ import pickle
 import os
 import sys
 import _LocalVariable
+import time
 
 sys.path.append(".")
 start_time = time.time()
 #%% Load data and trained model
-DATA_PATH = _LocalVariable._DATA_DIRECTORY + "\\raw_data-opinion-gardian.tsv"
-data = pd.read_csv(DATA_PATH, sep='\t', engine='python')
+DATA_PATH = _LocalVariable._DATA_DIRECTORY + "\\raw_data-opinion-combined.pkl"
+data = pd.read_pickle(DATA_PATH)
 
 os.chdir(_LocalVariable._OBJECT_DIRECTORY)
 
@@ -33,7 +34,7 @@ from projectpackage.data_preprocessing import TextProcessing
 data['combined_text'] = data['title'] + " " + data['text']
 data['combined_text'] = data['combined_text'].apply(lambda x: x.lower())
 data['combined_text'] = data['combined_text'].apply(TextProcessing.combine_specialwords)
-
+print("Preprocessing--- %s seconds ---" % (time.time() - start_time))
 #%% Tokenization
 from projectpackage.data_preprocessing import DataTransformation
 
@@ -43,19 +44,19 @@ from projectpackage.data_preprocessing import DataTransformation
 
 data['bow_vector'] = data['tokens'].apply(\
     lambda x: DataTransformation.get_bow_vector(x, word_index_map))
-
+print("Tokenization--- %s seconds ---" % (time.time() - start_time))
 DTM = DataTransformation.get_DTM_predict(data, word_index_map)
-
+print("DTM--- %s seconds ---" % (time.time() - start_time))
 #%% Prediction 
 prediction = model_ab.predict(DTM)
 prediction = pd.DataFrame(prediction)
 prediction.columns = ['brexit']
 
 data_predicted = pd.concat([data.reset_index(drop=True), prediction], axis=1)
-
+print("Predict--- %s seconds ---" % (time.time() - start_time))
 #%% save the prediction result
 os.chdir(_LocalVariable._DATA_DIRECTORY)
-FILENAME = "prediction_result-gardian.pkl"
-pd.to_pickle(data_predicted, FILENAME)
+FILENAME = "prediction_result-combined.pkl"
+#pd.to_pickle(data_predicted, FILENAME)
 
-print("--- %s seconds ---" % (time.time() - start_time))
+print("Save--- %s seconds ---" % (time.time() - start_time))
