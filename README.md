@@ -16,3 +16,6 @@ In this project, we will be capturing the public's sentiment through analyzing n
 Most, if not all, codes can be run directly with the appropriate set up outlined below:  
 1. Please change the content of _LocalVariable.example.py file and rename that as _LocalVariable.py
 2. Please download the lattest Data file from https://bit.ly/2XzFPMO and put data into a folder in  Data/ 
+
+#### Parallel Computing Scripts   
+Some of the codes involves multiprocessing, and parallel computation with GPU. Without sufficient computer resources, such code may temporarily and significantly reduce computer performance on other tasks. It is advised to use the standard scripts.   
