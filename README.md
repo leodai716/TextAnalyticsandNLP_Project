@@ -18,4 +18,6 @@ Most, if not all, codes can be run directly with the appropriate set up outlined
 2. Please download the lattest Data file from https://bit.ly/2XzFPMO and put data into a folder in  Data/ 
 
 #### Parallel Computing Scripts   
-Some of the codes involves multiprocessing, and parallel computation with GPU. Without sufficient computer resources, such code may temporarily and significantly reduce computer performance on other tasks. It is advised to use the standard scripts.   
+Scripts involving multiprocessing, and parallel computation with GPU are labeled *_multiprocessing.py.  
+Without sufficient computer resources, such code may temporarily and significantly reduce computer performance on other tasks. It is advised to use the standard scripts.   
+In general, developers/ endusers are not advised to modify anything in multiprocessing scripts.  
