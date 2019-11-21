@@ -11,3 +11,8 @@ In this project, we will be capturing the public's sentiment through analyzing n
 3. Running Machine Learning Model   
 4. Applying Model to classify previous events  
 5. Back test results with financial data to find correlation 
+
+## Notes to Developer
+Most, if not all, codes can be run directly with the appropriate set up outlined below:  
+1. Please change the content of _LocalVariable.example.py file and rename that as _LocalVariable.py
+2. Please download the lattest Data file from https://bit.ly/2XzFPMO and put data into a folder in  Data/ 
