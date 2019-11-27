@@ -45,7 +45,7 @@ news_paper_data = news_paper_data.reset_index(drop=True)
 
 # generate observations for input
 total_number_of_observation = len(news_paper_data.index)
-pick_number = min([1, total_number_of_observation])
+pick_number = min([60, total_number_of_observation])
 
 random_pick_list = random.sample(range(total_number_of_observation), pick_number)
 

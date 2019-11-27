@@ -5,3 +5,4 @@ data-streaming-tweets.tsv
 __pycache__/
 __file__/
 Data/
+.git/
