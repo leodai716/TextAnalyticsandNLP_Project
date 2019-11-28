@@ -57,7 +57,7 @@ df.plot(y = ["sentiment", "20_day_ma", "upper_band", "lower_band"],
         title = "Sentimental Bollinger Bands")
 plt.show()
 
-#plotting the wealth over time
+# plotting the wealth over time
 df.plot(y = "wealth",
         x = "Date",
         figsize=(12,6), 
