@@ -19,7 +19,7 @@ with open(PKL_DIR, "rb") as f:
 
 # parameters for the bollinger bands
 N = 20  # number of days in calculating moving average & SD
-K = 1   # width of the bands
+K = 2   # width of the bands
 
 # construct b-bands of the sentimental score
 df["20_day_ma"] = df["sentiment"].rolling(window=N).mean()
@@ -44,10 +44,16 @@ df = df.merge(eri, how="left")
 # then drop all the remaining rows with NaN (the first 19 days where constructing the b-bands is impossible)
 df = df.ffill().dropna()
 
-# trade volumn by day
-df["trade"] = df["signal"] * df["ERI_sterling"]
-# wealth = the cumulative sum of daily trade volumns, assuming wealth on day 1 = 0
-df["wealth"] = df["trade"].cumsum()
+# cash flow by day
+df["cash_flow"] = - df["signal"] * df["ERI_sterling"]
+# cash balance = the cumulative sum of daily CFs, assuming cash balance on day 1 = 0
+df["cash_balance"] = df["cash_flow"].cumsum()
+# treating each transaction as trading "one unit" of commodity
+df["pound_inventory"] = df["signal"].cumsum()
+# value of the pound inventory
+df["pound_balance"] = df["pound_inventory"] * df["ERI_sterling"]
+# wealth = cash_balance + pound_balance
+df["wealth"] = df["cash_balance"] + df["pound_balance"]
 
 # data visualization
 # plotting the b-bands
@@ -57,7 +63,7 @@ df.plot(y = ["sentiment", "20_day_ma", "upper_band", "lower_band"],
         title = "Sentimental Bollinger Bands")
 plt.show()
 
-# plotting the wealth over time
+#plotting the wealth over time
 df.plot(y = "wealth",
         x = "Date",
         figsize=(12,6), 
