@@ -13,7 +13,6 @@ import pickle
 import matplotlib.pyplot as plt
 
 sys.path.append(os.getcwd())
-sys.path.append("../")
 import _LocalVariable
 
 # input data directories
@@ -24,6 +23,7 @@ FTSE_DIR = "fina_data-ftse100.csv"
 
 
 # open .pkl, containing sentimental data
+
 with open(PKL_DIR, "rb") as f:
     df = pickle.load(f)
 
