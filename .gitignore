@@ -6,4 +6,4 @@ __pycache__/
 __file__/
 Data/
 .git/
-!strategy_testing/
+strategy_testing/
