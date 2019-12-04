@@ -40,7 +40,11 @@ df["lower_band"] = df["20_day_ma"] - df["20_day_sd"] * K
 # signal = 1 => buy; signal < 1 => sell
 df["buy_signal"] = np.where(df["sentiment"] > df["upper_band"], -1, 0)
 df["sell_signal"] = np.where(df["sentiment"] < df["lower_band"], 1, 0)
-df["signal"] = df["buy_signal"] + df["sell_signal"]
+df["raw_signal"] = df["buy_signal"] + df["sell_signal"]
+
+# hold 10 day strategy: send a reverse signal 10 days forward
+df["release_signal"] = - df["raw_signal"].shift(periods=10, fill_value=0)
+df["signal"] = df["raw_signal"] + df["release_signal"]
 
 # read effective exchange rate index from .csv input
 eri = pd.read_csv(ERI_DIR)
