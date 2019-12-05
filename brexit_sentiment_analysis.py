@@ -100,8 +100,8 @@ for i in range(BREXIT_DATA_NO):
     brexit_data.at[i,'polarity'] = s.polarity
 
 brexit_data.loc[:,'polarity'] = pd.to_numeric(brexit_data.loc[:,'polarity'])
-brexit_data.loc[:,'polarity'].mean()
-brexit_data.loc[:,'polarity'].std()
+print("mean:" + str(brexit_data.loc[:,'polarity'].mean()))
+print("sd:" + str(brexit_data.loc[:,'polarity'].std()))
 
 
 brexit_analysis_df = brexit_mention_df.copy()
@@ -113,7 +113,7 @@ for i in range(BREXIT_DATA_NO):
     
     index = brexit_analysis_df.index[brexit_analysis_df['Date'] == date]
     brexit_analysis_df.loc[index, 'sentiment'] += polarity
-RRR
+
 brexit_analysis_df['sentiment'] = brexit_analysis_df['sentiment']/\
                                   brexit_analysis_df['brexit_count']
                                   
@@ -132,5 +132,5 @@ os.chdir(_LocalVariable._DATA_DIRECTORY)
 CSV_NAME = "processed_data.csv"
 PKL_NAME = "processed_data.pkl"
 
-brexit_analysis_df.to_csv(CSV_NAME)
-brexit_analysis_df.to_pickle(PKL_NAME)
+#brexit_analysis_df.to_csv(CSV_NAME)
+#brexit_analysis_df.to_pickle(PKL_NAME)

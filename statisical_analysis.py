@@ -6,12 +6,15 @@ Created on Wed Dec  4 00:33:18 2019
 
 Objective: to perform descriptive and cross-correlation analysis on statistics collected
 """
+import os
 import time
 import numpy as np
 import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
+import _LocalVariable
 
+os.chdir(_LocalVariable._DATA_DIRECTORY)
 START_TIME = time.time()
 PKL_DIR = r"processed_data.pkl"
 ERI_DIR = r"fian-data_exchange_rate.csv"

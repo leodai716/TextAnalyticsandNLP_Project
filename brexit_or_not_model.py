@@ -79,8 +79,8 @@ print("naive base model score (test) :" + str(model_nb.score(x_test, y_test)))
 model_ab = AdaBoostClassifier()
 model_ab.fit(x_train, y_train)
 print("ada boost model score (train): " + str(model_ab.score(x_train, y_train)))
-print("ada boost model score (test): " + str(model_ab.score(x_test, y_test)))
-print("ada boost model score (test): ",str(model_ab.score(x_ori, y_ori)) )
+print("ada boost model score (test_subset): " + str(model_ab.score(x_test, y_test)))
+print("ada boost model score (test_wholeset): ",str(model_ab.score(x_ori, y_ori)))
 
 #%% Saving the results
 os.chdir(_LocalVariable._WORKING_DIRECTORY)

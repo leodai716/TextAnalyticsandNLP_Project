@@ -68,7 +68,7 @@ df["pound_inventory"] = df["signal"].cumsum()
 df["pound_balance"] = df["pound_inventory"] * df["ERI_sterling"]
 # wealth = cash_balance + pound_balance
 df["wealth"] = df["cash_balance"] + df["pound_balance"]
-
+df["wealth"] = df["wealth"]
 # data visualization
 # plotting the b-bands
 df.plot(y = ["sentiment", "20_day_ma", "upper_band", "lower_band"],
