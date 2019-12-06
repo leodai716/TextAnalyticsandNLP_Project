@@ -6,19 +6,19 @@ The United Kingdom’s departure from the European Union has been delayed multip
 In this project, we will be capturing the public's sentiment through analyzing news articles of British media with Natural Language Processing Techniques. We aim to find correlations between public sentiment and market movemen.
 
 ## Stages 
-1. Data collection
-Text Mining/
-2. Data preprocessing  
-clean_n_consolidate_binom_brexit_data.py
-3. Running Machine Learning Model
-brexit_or_not_model.py
-brexit_sentiment_analysis.py
-4. Applying Model to classify previous events 
-predict_brexit_or_not.py
-5. Back test results with financial data to find correlation 
-statistical_analysis.py
-strategy_testing-bollinger_band_strat.py
-strategy_testing_bollinger_band_strat_hold_10_days.py
+1. Data collection  
+Text Mining/  
+2. Data preprocessing    
+clean_n_consolidate_binom_brexit_data.py  
+3. Running Machine Learning Model  
+brexit_or_not_model.py  
+brexit_sentiment_analysis.py  
+4. Applying Model to classify previous events   
+predict_brexit_or_not.py  
+5. Back test results with financial data to find correlation   
+statistical_analysis.py  
+strategy_testing-bollinger_band_strat.py  
+strategy_testing_bollinger_band_strat_hold_10_days.py  
 
 ## Notes to Developer
 Most, if not all, codes can be run directly with the appropriate set up outlined below:  
