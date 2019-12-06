@@ -6,8 +6,9 @@ The United Kingdom’s departure from the European Union has been delayed multip
 In this project, we will be capturing the public's sentiment through analyzing news articles of British media with Natural Language Processing Techniques. We aim to find correlations between public sentiment and market movemen.
 
 ## Stages 
-1. Data collection  
+1. Data collection     
 Text Mining/  
+Financial Data/
 2. Data preprocessing    
 clean_n_consolidate_binom_brexit_data.py  
 3. Running Machine Learning Model  
