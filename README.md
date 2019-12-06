@@ -21,12 +21,10 @@ statistical_analysis.py
 strategy_testing-bollinger_band_strat.py  
 strategy_testing_bollinger_band_strat_hold_10_days.py  
 
-## Notes to Developer
+## Notes to Collaborators
 Most, if not all, codes can be run directly with the appropriate set up outlined below:  
 1. Please change the content of _LocalVariable.example.py file and rename that as _LocalVariable.py
 2. Please download the lattest Data file from https://bit.ly/2XzFPMO and put data into a folder in  Data/ 
 
 #### Parallel Computing Scripts   
 Scripts involving multiprocessing, and parallel computation with GPU are labeled *_multiprocessing.py.  
-Without sufficient computer resources, such code may temporarily and significantly reduce computer performance on other tasks. It is advised to use the standard scripts.   
-In general, developers/ endusers are not advised to modify anything in multiprocessing scripts.  
